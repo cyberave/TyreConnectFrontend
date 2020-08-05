@@ -1,0 +1,42 @@
+<div class="container wrapper wrapper2">
+    <div class="row">
+        <!-- Form -->
+        <div class="col-md-12">
+            <h3>Text Analysis</h3>
+            <form [formGroup]="textAnalysisForm" (ngSubmit)="submitForm()" novalidate>
+                <div class="form-group">
+                    <label>Text</label>                    
+                    <textarea class="form-control" formControlName="text" rows="3" maxlength="8192"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Subtext</label>
+                    <input type="text" formControlName="subtext" class="form-control"  maxlength="128">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Character Positions table -->
+<div id="charPositions" class="col-md-12" hidden="true">
+    <div class="inner">
+        <h3>Character Positions</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Result</th>
+                    <th scope="col">Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let position of CharacterPositionList">
+                    <th scope="row">{{position.id}}</th>
+                    <td>{{position.character_position}}</td>
+                    <td>{{position.character_position_details}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

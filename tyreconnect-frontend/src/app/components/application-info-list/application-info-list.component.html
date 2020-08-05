@@ -1,0 +1,20 @@
+<!-- Application Info table -->
+<div class="col-md-12">
+    <div class="inner">
+        <h3>Application Info List</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Info Type</th>
+                    <th scope="col">Value</th>                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let info of InformationSection">
+                    <th scope="row">{{info.key}}</th>                    
+                    <td>{{info.value}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

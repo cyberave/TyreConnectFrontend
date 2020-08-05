@@ -1,0 +1,40 @@
+trigger:
+  branches:
+    include:
+    - master
+    - releases/*
+    
+resources:
+- repo: self
+
+pool:
+  vmImage: 'Ubuntu 18.04'
+
+variables:
+  buildConfiguration: 'Release'
+  ngBuildConfiguration: '--prod'
+
+steps:
+
+- task: Npm@1
+  displayName: 'npm install'
+  inputs:
+    command: 'install'
+    workingDir: '$(Build.SourcesDirectory)/tyreconnect-frontend'
+
+- task: Npm@1
+  displayName: 'Build Angular'
+  inputs:
+    command: custom
+    customCommand: run build -- $(ngBuildConfiguration)
+    workingDir: '$(Build.SourcesDirectory)/tyreconnect-frontend'
+
+- task: PublishPipelineArtifact@0
+  inputs:
+    artifactName: PipelineArtifactProd
+    targetPath: '$(Build.SourcesDirectory)/tyreconnect-frontend/dist'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.SourcesDirectory)/tyreconnect-frontend/dist'
+    ArtifactName: BuildArtifactProd
